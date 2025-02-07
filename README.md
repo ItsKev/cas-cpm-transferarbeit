@@ -3,6 +3,8 @@
 ## Usage
 
 ```bash
+export ARM_ACCESS_KEY=<storage-account-access-key>
+
 terraform init
 
 terraform apply
