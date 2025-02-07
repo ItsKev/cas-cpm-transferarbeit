@@ -1,5 +1,4 @@
-resource "null_resource" "default" {
-  provisioner "local-exec" {
-    command = "echo 'Hello World'"
-  }
+resource "azurerm_resource_group" "example" {
+  name     = "example-resources"
+  location = "East US"
 }
