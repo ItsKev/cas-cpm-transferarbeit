@@ -1,5 +1,11 @@
+variable "subscription_id" {
+  description = "The subscription ID in which to create the resources."
+  type        = string
+}
+
 variable "resource_group_name" {
-  type = string
+  description = "The name of the resource group in which to create the resources."
+  type        = string
 }
 
 variable "policy_assignments" {
