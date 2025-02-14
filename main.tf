@@ -1,4 +1,9 @@
-resource "azurerm_resource_group" "example" {
-  name     = "example-resource"
-  location = "East US"
+module "sandbox-1" {
+  source              = "./modules/sandbox"
+  resource_group_name = "sandbox-1"
+}
+
+module "sandbox-2" {
+  source              = "./modules/sandbox"
+  resource_group_name = "sandbox-2"
 }
