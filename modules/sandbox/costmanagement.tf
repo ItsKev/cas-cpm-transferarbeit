@@ -1,13 +1,13 @@
 resource "azurerm_consumption_budget_subscription" "sandbox_budget" {
-  name            = "sandbox-budget"
+  name            = "sandbox-budget-${azurerm_resource_group.sandbox.name}"
   subscription_id = var.subscription_id
 
   amount     = 500
   time_grain = "Monthly"
 
   time_period {
-    start_date = formatdate("YYYY-MM-DDT00:00:00Z", timestamp())
-    end_date   = "2026-01-01T00:00:00Z"
+    start_date = "2025-01-01T00:00:00Z"
+    end_date   = "2027-01-01T00:00:00Z"
   }
 
   filter {
