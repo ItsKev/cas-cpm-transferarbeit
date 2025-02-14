@@ -6,8 +6,8 @@ resource "azurerm_consumption_budget_subscription" "sandbox_budget" {
   time_grain = "Monthly"
 
   time_period {
-    start_date = timestamp()
-    end_date   = "2026-01-01"
+    start_date = formatdate("YYYY-MM-DDT00:00:00Z", timestamp())
+    end_date   = "2026-01-01T00:00:00Z"
   }
 
   filter {
