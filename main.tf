@@ -7,14 +7,18 @@ locals {
   ]
 }
 
+data "azurerm_subscription" "current" {}
+
 module "sandbox-1" {
   source              = "./modules/sandbox"
   resource_group_name = "sandbox-1"
   policy_assignments  = local.all_policies
+  subscription_id     = data.azurerm_subscription.current.id
 }
 
 module "sandbox-2" {
   source              = "./modules/sandbox"
   resource_group_name = "sandbox-2"
   policy_assignments  = local.all_policies
+  subscription_id     = data.azurerm_subscription.current.id
 }
