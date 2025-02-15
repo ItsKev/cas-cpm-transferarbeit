@@ -14,6 +14,7 @@ module "sandbox-1" {
   resource_group_name = "sandbox-1"
   policy_assignments  = local.all_policies
   subscription_id     = data.azurerm_subscription.current.id
+  automation_account  = azurerm_automation_account.sandbox
 }
 
 module "sandbox-2" {
@@ -21,4 +22,5 @@ module "sandbox-2" {
   resource_group_name = "sandbox-2"
   policy_assignments  = local.all_policies
   subscription_id     = data.azurerm_subscription.current.id
+  automation_account  = azurerm_automation_account.sandbox
 }

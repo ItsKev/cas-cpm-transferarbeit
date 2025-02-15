@@ -1,29 +1,8 @@
-resource "azurerm_automation_account" "sandbox" {
-  name                = "automation-account-${azurerm_resource_group.sandbox.name}"
-  location            = azurerm_resource_group.sandbox.location
-  resource_group_name = azurerm_resource_group.sandbox.name
-  sku_name            = "Basic"
-
-  identity {
-    type = "SystemAssigned"
-  }
-}
-
-data "azurerm_role_definition" "vm_contributor" {
-  name = "Virtual Machine Contributor"
-}
-
-resource "azurerm_role_assignment" "vm_contributor" {
-  scope              = azurerm_resource_group.sandbox.id
-  role_definition_id = data.azurerm_role_definition.vm_contributor.id
-  principal_id       = azurerm_automation_account.sandbox.identity[0].principal_id
-}
-
 resource "azurerm_automation_runbook" "shutdown_vms" {
-  name                    = "shutdown-vms"
+  name                    = "shutdown-vms-${azurerm_resource_group.sandbox.name}"
   location                = azurerm_resource_group.sandbox.location
-  resource_group_name     = azurerm_resource_group.sandbox.name
-  automation_account_name = azurerm_automation_account.sandbox.name
+  resource_group_name     = var.automation_account.resource_group_name
+  automation_account_name = var.automation_account.name
   log_verbose             = true
   log_progress            = true
   description             = "Runbook to shutdown running VMs on weekends."
@@ -57,16 +36,16 @@ resource "azurerm_automation_runbook" "shutdown_vms" {
 }
 
 resource "azurerm_automation_schedule" "daily" {
-  name                    = "daily-runbook-schedule"
-  resource_group_name     = azurerm_resource_group.sandbox.name
-  automation_account_name = azurerm_automation_account.sandbox.name
+  name                    = "daily-runbook-schedule-${azurerm_resource_group.sandbox.name}"
+  resource_group_name     = var.automation_account.resource_group_name
+  automation_account_name = var.automation_account.name
   frequency               = "Day"
   interval                = 1
 }
 
 resource "azurerm_automation_job_schedule" "daily_runbook" {
-  automation_account_name = azurerm_automation_account.sandbox.name
-  resource_group_name     = azurerm_resource_group.sandbox.name
+  automation_account_name = var.automation_account.name
+  resource_group_name     = var.automation_account.resource_group_name
   runbook_name            = azurerm_automation_runbook.shutdown_vms.name
   schedule_name           = azurerm_automation_schedule.daily.name
 }
