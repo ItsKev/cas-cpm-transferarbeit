@@ -15,3 +15,11 @@ variable "policy_assignments" {
     id   = string
   }))
 }
+
+variable "automation_account" {
+  description = "The name of the automation account."
+  type = object({
+    name                = string
+    resource_group_name = string
+  })
+}
