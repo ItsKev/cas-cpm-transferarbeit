@@ -1,4 +1,4 @@
-# CAS Cloud and Platform Manager Transferarbeit - Innovation durch Cloud-Sandboxen
+# CAS Cloud and Platform Manager Transferarbeit - Innovation durch Nutzung einer Cloud Sandbox
 
 ## Usage
 
