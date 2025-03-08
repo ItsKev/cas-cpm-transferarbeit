@@ -17,18 +17,3 @@ module "sandbox-1" {
   automation_account  = azurerm_automation_account.sandbox
 }
 
-module "sandbox-2" {
-  source              = "./modules/sandbox"
-  resource_group_name = "sandbox-2"
-  policy_assignments  = local.all_policies
-  subscription_id     = data.azurerm_subscription.current.id
-  automation_account  = azurerm_automation_account.sandbox
-}
-
-module "sandbox-3" {
-  source              = "./modules/sandbox"
-  resource_group_name = "sandbox-3"
-  policy_assignments  = local.all_policies
-  subscription_id     = data.azurerm_subscription.current.id
-  automation_account  = azurerm_automation_account.sandbox
-}
